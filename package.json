@@ -1,5 +1,6 @@
 {
   "name": "day-n-night",
+  "description": "Day n' Night: Sunrise, sunset, moonrise, moonset tracker.",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
