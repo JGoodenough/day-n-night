@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { useLocation } from './hooks/use-location';
 
 export default function App() {
+  const { locationStatus } = useLocation();
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Day N' Nigh appt!</Text>
+      <Text>{locationStatus}</Text>
       <StatusBar style="auto" />
     </View>
   );
