@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 
 export const useLocation = () => {
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState<Location.LocationObject>(null);
   const [locationPermissionStatus, setLocationPermissionStatus] =
     useState(null);
+  const [locationAddresses, setLocationAddresses] = useState(null);
   useEffect(() => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -13,10 +14,19 @@ export const useLocation = () => {
         return;
       }
 
-      const location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      const locationObj = await Location.getCurrentPositionAsync();
+      setLocation(locationObj);
     })();
   }, []);
 
-  return { location, setLocation, locationPermissionStatus };
+  useEffect(() => {
+    (async () => {
+      if (location?.coords) {
+        const addresses = await Location.reverseGeocodeAsync(location.coords);
+        setLocationAddresses(addresses);
+      }
+    })();
+  }, [location]);
+
+  return { location, setLocation, locationAddresses, locationPermissionStatus };
 };
