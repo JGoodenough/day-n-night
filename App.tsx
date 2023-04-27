@@ -12,7 +12,7 @@ export default function App() {
     useLocation();
   return (
     <View style={styles.container}>
-      <Text style={styles.appName}>Day N' Night</Text>
+      <Text style={styles.appName}>Day n' Night</Text>
       <AddressLookup location={location} setLocation={setLocation} />
       <CurrentLocation
         location={location}
