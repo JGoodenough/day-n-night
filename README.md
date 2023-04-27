@@ -1,6 +1,6 @@
 # Day N' Night
 
-Sunrise, sunset, moonrise, moonset tracker.
+Sunrise, sunset tracker.
 
 ## Tech
 
