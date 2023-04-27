@@ -4,6 +4,8 @@ import { useLocation } from './hooks/use-location';
 import { PermissionStatus } from 'expo-location';
 import AddressLookup from './components/AddressLookup';
 import CurrentLocation from './components/CurrentLocation';
+import { A } from '@expo/html-elements';
+import SunriseSunset from './components/SunriseSunset';
 
 export default function App() {
   const { location, setLocation, locationAddresses, locationPermissionStatus } =
@@ -17,6 +19,16 @@ export default function App() {
         locationAddresses={locationAddresses}
       />
       <StatusBar style="auto" />
+      <SunriseSunset
+        lat={location?.coords?.latitude}
+        lng={location?.coords?.longitude}
+      />
+      <Text>
+        Powered by:{' '}
+        <A style={{ color: 'blue' }} href="https://sunrisesunset.io/">
+          SunriseSunset.io
+        </A>
+      </Text>
     </View>
   );
 }

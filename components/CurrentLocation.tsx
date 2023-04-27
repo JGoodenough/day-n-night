@@ -8,7 +8,7 @@ const CurrentLocation = ({ location, locationAddresses }) => {
         <Text>Lat: {location.coords.latitude}</Text>
       ) : null}
       {!!location?.coords?.longitude ? (
-        <Text>Long: {location.coords.longitude}</Text>
+        <Text>Lng: {location.coords.longitude}</Text>
       ) : null}
       {locationAddresses ? (
         <Text>
