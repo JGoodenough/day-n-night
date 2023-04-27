@@ -1,10 +1,8 @@
 import { SafeAreaView, StyleSheet, TextInput } from 'react-native';
 import { geocodeAsync } from 'expo-location';
-import { useLocation } from '../hooks/use-location';
 import { useEffect, useState } from 'react';
 
-const AddressLookup = () => {
-  const { location, setLocation } = useLocation();
+const AddressLookup = ({ location, setLocation }) => {
   const [text, onChangeText] = useState('');
 
   useEffect(() => {

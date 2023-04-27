@@ -6,13 +6,16 @@ import AddressLookup from './components/AddressLookup';
 import CurrentLocation from './components/CurrentLocation';
 
 export default function App() {
-  const { location, locationAddresses, locationPermissionStatus } =
+  const { location, setLocation, locationAddresses, locationPermissionStatus } =
     useLocation();
   return (
     <View style={styles.container}>
       <Text style={styles.appName}>Day N' Night</Text>
-      <CurrentLocation />
-      <AddressLookup />
+      <AddressLookup location={location} setLocation={setLocation} />
+      <CurrentLocation
+        location={location}
+        locationAddresses={locationAddresses}
+      />
       <StatusBar style="auto" />
     </View>
   );
