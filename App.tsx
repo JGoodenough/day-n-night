@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { useLocation } from './hooks/use-location';
 import { PermissionStatus } from 'expo-location';
+import AddressLookup from './components/AddressLookup';
 import CurrentLocation from './components/CurrentLocation';
 
 export default function App() {
@@ -10,10 +11,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.appName}>Day N' Night</Text>
-      <CurrentLocation
-        location={location}
-        locationAddresses={locationAddresses}
-      />
+      <CurrentLocation />
+      <AddressLookup />
       <StatusBar style="auto" />
     </View>
   );

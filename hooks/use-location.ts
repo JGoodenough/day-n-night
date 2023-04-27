@@ -21,12 +21,23 @@ export const useLocation = () => {
 
   useEffect(() => {
     (async () => {
-      if (location?.coords) {
-        const addresses = await Location.reverseGeocodeAsync(location.coords);
+      if (location?.coords?.latitude || location?.coords?.longitude) {
+        console.log('location changed', location?.timestamp);
+        const coords = {
+          latitude: location.coords?.latitude,
+          longitude: location.coords?.longitude,
+        };
+        const addresses = await Location.reverseGeocodeAsync(coords);
         setLocationAddresses(addresses);
       }
     })();
   }, [location]);
 
-  return { location, setLocation, locationAddresses, locationPermissionStatus };
+  return {
+    location,
+    setLocation,
+    locationAddresses,
+    setLocationAddresses,
+    locationPermissionStatus,
+  };
 };

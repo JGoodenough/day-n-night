@@ -1,36 +1,25 @@
-import { LocationGeocodedAddress, LocationObject } from 'expo-location';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
+import { useLocation } from '../hooks/use-location';
+import { useEffect } from 'react';
 
-type CurrentLocationProps = {
-  location?: LocationObject;
-  locationAddresses?: LocationGeocodedAddress[];
-};
+const CurrentLocation = () => {
+  const { location, locationAddresses } = useLocation();
 
-const CurrentLocation = ({
-  location,
-  locationAddresses,
-}: CurrentLocationProps) => {
   return (
-    <>
-      {location?.coords && (
-        <>
-          <Text>Lat: {location.coords.latitude}</Text>
-          <Text>Long: {location.coords.longitude}</Text>
-          {locationAddresses?.map((address, index) => {
-            return (
-              <Text key={index}>
-                {address && (
-                  <Text>
-                    {address.city}, {address.region}, {address.country}
-                  </Text>
-                )}
-              </Text>
-            );
-          })}
-          <Text>{JSON.stringify(locationAddresses, null, 2)}</Text>
-        </>
-      )}
-    </>
+    <View>
+      <Text>Current Location:</Text>
+      {!!location?.coords?.latitude ? (
+        <Text>Lat: {location.coords.latitude}</Text>
+      ) : null}
+      {!!location?.coords?.longitude ? (
+        <Text>Long: {location.coords.longitude}</Text>
+      ) : null}
+      {!!(locationAddresses?.length > 0) ? (
+        <Text>
+          {`${locationAddresses[0].city}, ${locationAddresses[0].region}`}
+        </Text>
+      ) : null}
+    </View>
   );
 };
 
