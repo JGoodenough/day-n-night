@@ -1,12 +1,6 @@
 import { Text, View } from 'react-native';
-import { useLocation } from '../hooks/use-location';
-import { useEffect } from 'react';
 
 const CurrentLocation = ({ location, locationAddresses }) => {
-  useEffect(() => {
-    console.info('locationAddresses', locationAddresses);
-  }, [locationAddresses]);
-
   return (
     <View>
       <Text style={{ fontWeight: '600' }}>Current Location:</Text>

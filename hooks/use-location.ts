@@ -27,7 +27,6 @@ export const useLocation = () => {
           longitude: location.coords?.longitude,
         };
         const addresses = await Location.reverseGeocodeAsync(coords);
-        console.log('addresses', addresses);
         setLocationAddresses([...addresses]);
       }
     })();
