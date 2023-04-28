@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { useLocation } from './hooks/use-location';
+import { useLocation } from '../hooks/use-location';
 import { PermissionStatus } from 'expo-location';
-import AddressLookup from './components/AddressLookup';
-import CurrentLocation from './components/CurrentLocation';
+import AddressLookup from '../components/AddressLookup';
+import CurrentLocation from '../components/CurrentLocation';
 import { A } from '@expo/html-elements';
-import SunriseSunset from './components/SunriseSunset';
+import SunriseSunset from '../components/SunriseSunset';
 
 export default function App() {
   const { location, setLocation, locationAddresses, locationPermissionStatus } =
