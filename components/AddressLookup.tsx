@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, TextInput } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Text, View } from 'react-native';
 import { geocodeAsync } from 'expo-location';
 import { useEffect, useState } from 'react';
 
@@ -21,10 +21,11 @@ const AddressLookup = ({ location, setLocation }) => {
   }, [text]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.AddressLookup__SafeContainer}>
       <TextInput
+        aria-label="Location Search"
         onChangeText={onChangeText}
-        style={styles.input}
+        style={styles.AddressLookup__Input}
         value={text}
         placeholder="Enter your location here"
       />
@@ -32,12 +33,18 @@ const AddressLookup = ({ location, setLocation }) => {
   );
 };
 const styles = StyleSheet.create({
-  input: {
+  AddressLookup__SafeContainer: {
+    flexDirection: 'row',
+  },
+  AddressLookup__InputTitle: {
+    fontWeight: '600',
+  },
+  AddressLookup__Input: {
     height: 40,
-    margin: 12,
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,
+    flex: 1,
   },
 });
 export default AddressLookup;

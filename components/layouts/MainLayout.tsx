@@ -36,5 +36,6 @@ const styles = StyleSheet.create({
   MainLayout__Body: {
     flex: 3,
     padding: 5,
+    alignContent: 'flex-start',
   },
 });
