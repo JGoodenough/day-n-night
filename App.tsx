@@ -6,30 +6,33 @@ import AddressLookup from './components/AddressLookup';
 import CurrentLocation from './components/CurrentLocation';
 import { A } from '@expo/html-elements';
 import SunriseSunset from './components/SunriseSunset';
+import MainLayout from './components/layouts/MainLayout';
 
 export default function App() {
   const { location, setLocation, locationAddresses, locationPermissionStatus } =
     useLocation();
   return (
-    <View style={styles.container}>
-      <Text style={styles.appName}>Day n' Night</Text>
-      <AddressLookup location={location} setLocation={setLocation} />
-      <CurrentLocation
-        location={location}
-        locationAddresses={locationAddresses}
-      />
-      <StatusBar style="auto" />
-      <SunriseSunset
-        lat={location?.coords?.latitude}
-        lng={location?.coords?.longitude}
-      />
-      <Text>
-        Powered by:{' '}
-        <A style={{ color: 'blue' }} href="https://sunrisesunset.io/">
-          SunriseSunset.io
-        </A>
-      </Text>
-    </View>
+    <MainLayout>
+      <View style={styles.container}>
+        <Text style={styles.appName}>Day n' Night</Text>
+        <AddressLookup location={location} setLocation={setLocation} />
+        <CurrentLocation
+          location={location}
+          locationAddresses={locationAddresses}
+        />
+        <StatusBar style="auto" />
+        <SunriseSunset
+          lat={location?.coords?.latitude}
+          lng={location?.coords?.longitude}
+        />
+        <Text>
+          Powered by:{' '}
+          <A style={{ color: 'blue' }} href="https://sunrisesunset.io/">
+            SunriseSunset.io
+          </A>
+        </Text>
+      </View>
+    </MainLayout>
   );
 }
 
