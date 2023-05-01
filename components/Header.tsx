@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FA5F55',
+    backgroundColor: '#ffa700',
   },
   Header__AppName: {
     fontWeight: 'bold',
