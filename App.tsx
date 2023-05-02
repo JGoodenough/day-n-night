@@ -15,7 +15,8 @@ export default function App() {
       <View style={styles.container}>
         <AddressLookup location={location} setLocation={setLocation} />
         <CurrentLocation
-          location={location}
+          latitude={location?.coords?.latitude}
+          longitude={location?.coords?.longitude}
           locationAddresses={locationAddresses}
         />
         <StatusBar style="auto" />
