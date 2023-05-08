@@ -5,7 +5,7 @@ import { LocationObject, LocationGeocodedAddress } from 'expo-location';
 enum ErrorMessages {
   LatNotFound = 'Latitude coordinate cannot be found.',
   LngNotFound = 'Longitude coordinate cannot be found.',
-  LocationAddressNotFound = 'Location cannot be found.',
+  LocationAddressNotFound = 'Location cannot be found. Try using the search bar above to search for a location.',
 }
 
 type CurrentLocation = {
