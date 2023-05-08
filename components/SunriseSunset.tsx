@@ -27,7 +27,7 @@ const SunriseSunset = ({ lat, lng }) => {
   }, [lat, lng]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>First light: {firstLight}</Text>
       <Text>Sunrise: {sunrise}</Text>
       <Text>Sunset: {sunset}</Text>
@@ -37,3 +37,12 @@ const SunriseSunset = ({ lat, lng }) => {
 };
 
 export default SunriseSunset;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 3,
+    backgroundColor: '#fff',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+});

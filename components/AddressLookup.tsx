@@ -35,6 +35,7 @@ const AddressLookup = ({ location, setLocation }) => {
 const styles = StyleSheet.create({
   AddressLookup__SafeContainer: {
     flexDirection: 'row',
+    paddingBottom: 4,
   },
   AddressLookup__InputTitle: {
     fontWeight: '600',

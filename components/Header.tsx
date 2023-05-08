@@ -20,5 +20,6 @@ const styles = StyleSheet.create({
   Header__AppName: {
     fontWeight: 'bold',
     fontSize: 32,
+    fontFamily: 'Helvetica',
   },
 });
