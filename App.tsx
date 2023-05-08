@@ -8,6 +8,7 @@ import SunriseSunset from './components/SunriseSunset';
 import MainLayout from './components/layouts/MainLayout';
 import { useAppFont } from './hooks/use-app-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { AppFontSizes, AppFontFamilies } from './constants/ui';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -47,5 +48,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingTop: 0,
     paddingBottom: 0,
+    fontSize: AppFontSizes.BodyFontSize,
+    fontFamily: AppFontFamilies.MainFontFamily,
   },
 });

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { LocationObject, LocationGeocodedAddress } from 'expo-location';
+import { AppFontFamilies, AppFontSizes, AppStyles } from '../constants/ui';
 
 enum ErrorMessages {
   LatNotFound = 'Latitude coordinate cannot be found.',
@@ -22,29 +23,36 @@ const CurrentLocation: FC<CurrentLocation> = ({
   return (
     <View>
       <Text style={styles.CurrentLocation__Title}>Current Location:</Text>
-      <View style={styles.CurrentLocation__LatContainer}>
-        <Text>Lat: </Text>
-        {!!latitude ? (
-          <Text>{latitude}</Text>
+
+      <View style={styles.CurrentLocation__LocationAddressContainer}>
+        {locationAddresses ? (
+          <Text style={styles.CurrentLocation__LocationAddress}>
+            {locationAddresses[0].city}, {locationAddresses[0].region}
+          </Text>
         ) : (
-          <Text>{ErrorMessages.LatNotFound}</Text>
-        )}
-      </View>
-      <View style={styles.CurrentLocation__LngContainer}>
-        <Text>Lng: </Text>
-        {!!longitude ? (
-          <Text>{longitude}</Text>
-        ) : (
-          <Text>{ErrorMessages.LngNotFound}</Text>
+          <Text style={styles.CurrentLocation__NotFound}>
+            {ErrorMessages.LocationAddressNotFound}
+          </Text>
         )}
       </View>
 
-      <View style={styles.CurrentLocation__LocationAddressContainer}>
-        <Text>
-          {locationAddresses
-            ? `${locationAddresses[0].city}, ${locationAddresses[0].region}`
-            : ErrorMessages.LocationAddressNotFound}
-        </Text>
+      <View style={styles.CurrentLocation__LatLngContainer}>
+        <Text style={styles.CurrentLocation__label}>Lat: </Text>
+        {!!latitude ? (
+          <Text>{latitude}</Text>
+        ) : (
+          <Text style={styles.CurrentLocation__NotFound}>
+            {ErrorMessages.LatNotFound}
+          </Text>
+        )}
+        <Text style={styles.CurrentLocation__label}>Lng: </Text>
+        {!!longitude ? (
+          <Text>{longitude}</Text>
+        ) : (
+          <Text style={styles.CurrentLocation__NotFound}>
+            {ErrorMessages.LngNotFound}
+          </Text>
+        )}
       </View>
     </View>
   );
@@ -53,15 +61,22 @@ const CurrentLocation: FC<CurrentLocation> = ({
 const styles = StyleSheet.create({
   CurrentLocation__Title: {
     fontWeight: '600',
+    fontSize: AppFontSizes.BodyHeaderFontSize,
   },
-  CurrentLocation__LatContainer: {
-    flexDirection: 'row',
-  },
-  CurrentLocation__LngContainer: {
+  CurrentLocation__LatLngContainer: {
     flexDirection: 'row',
   },
   CurrentLocation__LocationAddressContainer: {
     flexDirection: 'row',
+  },
+  CurrentLocation__LocationAddress: {
+    fontSize: 28,
+  },
+  CurrentLocation__NotFound: {
+    color: 'red',
+  },
+  CurrentLocation__label: {
+    fontWeight: '600',
   },
 });
 

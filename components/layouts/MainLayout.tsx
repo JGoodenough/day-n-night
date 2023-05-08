@@ -2,8 +2,7 @@ import { FC, ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from '../Header';
 import { A } from '@expo/html-elements';
-import { AppStyles } from '../../constants/ui';
-import { useAppFont } from '../../hooks/use-app-font';
+import { AppFontSizes } from '../../constants/ui';
 
 export type MainLayout = {
   children?: ReactNode;
@@ -19,7 +18,7 @@ const MainLayout: FC<MainLayout> = ({ children, onLayoutRootView }) => {
         style={{
           textAlign: 'center',
           fontFamily: 'WaitingfortheSunrise_400Regular',
-          fontSize: AppStyles.MainFontSize,
+          fontSize: AppFontSizes.MainFontSize,
         }}
       >
         Powered by:{' '}
