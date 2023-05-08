@@ -6,12 +6,21 @@ import AddressLookup from './components/AddressLookup';
 import CurrentLocation from './components/CurrentLocation';
 import SunriseSunset from './components/SunriseSunset';
 import MainLayout from './components/layouts/MainLayout';
+import { useAppFont } from './hooks/use-app-font';
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const { fontsLoaded, onLayoutRootView } = useAppFont();
   const { location, setLocation, locationAddresses, locationPermissionStatus } =
     useLocation();
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
-    <MainLayout>
+    <MainLayout onLayoutRootView={onLayoutRootView}>
       <View style={styles.container}>
         <AddressLookup location={location} setLocation={setLocation} />
         <CurrentLocation

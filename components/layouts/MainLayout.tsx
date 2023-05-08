@@ -2,18 +2,26 @@ import { FC, ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from '../Header';
 import { A } from '@expo/html-elements';
+import { AppStyles } from '../../constants/ui';
+import { useAppFont } from '../../hooks/use-app-font';
 
 export type MainLayout = {
   children?: ReactNode;
+  onLayoutRootView?: () => Promise<void>;
 };
-
-const MainLayout: FC<MainLayout> = ({ children }) => {
+const MainLayout: FC<MainLayout> = ({ children, onLayoutRootView }) => {
   return (
-    <View style={styles.MainLayout__Container}>
+    <View style={styles.MainLayout__Container} onLayout={onLayoutRootView}>
       <Header />
       <View style={styles.MainLayout__Body}>{children}</View>
 
-      <Text style={{ textAlign: 'center' }}>
+      <Text
+        style={{
+          textAlign: 'center',
+          fontFamily: 'WaitingfortheSunrise_400Regular',
+          fontSize: AppStyles.MainFontSize,
+        }}
+      >
         Powered by:{' '}
         <A
           style={{ color: 'blue', textAlign: 'center' }}

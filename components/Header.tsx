@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { AppStyles } from '../constants/ui';
 
 const Header = () => {
   return (
@@ -16,9 +17,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#ffa700',
+    fontFamily: 'WaitingfortheSunrise_400Regular',
   },
   Header__AppName: {
-    fontWeight: 'bold',
-    fontSize: 32,
+    fontSize: AppStyles.HeaderFontSize,
+    fontFamily: 'WaitingfortheSunrise_400Regular',
   },
 });
