@@ -21,7 +21,11 @@ const CurrentLocation: FC<CurrentLocation> = ({
   locationAddresses,
 }) => {
   return (
-    <View>
+    <View
+      style={{
+        flexShrink: 1,
+      }}
+    >
       <Text style={styles.CurrentLocation__Title}>Current Location:</Text>
 
       <View style={styles.CurrentLocation__LocationAddressContainer}>
@@ -74,6 +78,7 @@ const styles = StyleSheet.create({
   },
   CurrentLocation__NotFound: {
     color: 'red',
+    fontSize: AppFontSizes.BodyFontSize,
   },
   CurrentLocation__label: {
     fontWeight: '600',

@@ -1,5 +1,5 @@
 export enum AppFontSizes {
-  MainFontSize = 22,
+  MainFontSize = 18,
   HeaderFontSize = 36,
   BodyFontSize = 28,
   BodyHeaderFontSize = 32,
