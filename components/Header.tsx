@@ -16,11 +16,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffa700',
+    backgroundColor: '#1a7998',
     fontFamily: 'WaitingfortheSunrise_400Regular',
   },
   Header__AppName: {
     fontSize: AppFontSizes.HeaderFontSize,
     fontFamily: AppFontFamilies.MainFontFamily,
+    color: '#fff',
   },
 });
