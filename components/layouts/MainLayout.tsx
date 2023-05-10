@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import Header from '../Header';
 import Acknowledgements from '../Acknowledgements';
 
@@ -9,11 +9,14 @@ export type MainLayout = {
 };
 const MainLayout: FC<MainLayout> = ({ children, onLayoutRootView }) => {
   return (
-    <View style={styles.MainLayout__Container} onLayout={onLayoutRootView}>
+    <SafeAreaView
+      style={styles.MainLayout__Container}
+      onLayout={onLayoutRootView}
+    >
       <Header />
       <View style={styles.MainLayout__Body}>{children}</View>
       <Acknowledgements />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -25,7 +28,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   MainLayout__Body: {
-    flex: 4,
+    width: '100%',
+    height: '85%',
     padding: 10,
   },
 });
