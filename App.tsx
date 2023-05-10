@@ -41,10 +41,10 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
     backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    // alignItems: 'flex-start',
+    // justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     padding: 10,
     paddingTop: 0,
     paddingBottom: 0,

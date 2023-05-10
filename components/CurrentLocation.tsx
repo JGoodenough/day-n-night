@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { LocationObject, LocationGeocodedAddress } from 'expo-location';
-import { AppFontFamilies, AppFontSizes, AppStyles } from '../constants/ui';
+import { LocationGeocodedAddress } from 'expo-location';
+import { AppFontSizes } from '../constants/ui';
 
 enum ErrorMessages {
   LatNotFound = 'Latitude coordinate cannot be found.',
@@ -21,11 +21,7 @@ const CurrentLocation: FC<CurrentLocation> = ({
   locationAddresses,
 }) => {
   return (
-    <View
-      style={{
-        flexShrink: 1,
-      }}
-    >
+    <View>
       <Text style={styles.CurrentLocation__Title}>Current Location:</Text>
 
       <View style={styles.CurrentLocation__LocationAddressContainer}>
@@ -43,7 +39,7 @@ const CurrentLocation: FC<CurrentLocation> = ({
       <View style={styles.CurrentLocation__LatLngContainer}>
         <Text style={styles.CurrentLocation__label}>Lat: </Text>
         {!!latitude ? (
-          <Text>{latitude}</Text>
+          <Text style={styles.CurrentLocation__latOrLng}>{latitude}</Text>
         ) : (
           <Text style={styles.CurrentLocation__NotFound}>
             {ErrorMessages.LatNotFound}
@@ -82,6 +78,9 @@ const styles = StyleSheet.create({
   },
   CurrentLocation__label: {
     fontWeight: '600',
+  },
+  CurrentLocation__latOrLng: {
+    marginRight: 4,
   },
 });
 

@@ -3,7 +3,7 @@ import { AppFontSizes, AppFontFamilies } from '../constants/ui';
 
 const Header = () => {
   return (
-    <View style={styles.Header__Container}>
+    <View style={{ ...styles.Header__Container }}>
       <Text style={styles.Header__AppName}>Day n' Night</Text>
     </View>
   );

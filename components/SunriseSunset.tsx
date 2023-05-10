@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 const SunriseSunsetAPI = 'https://api.sunrisesunset.io/json';
-const EmptyTime = '--:--';
+enum EmptyValues {
+  EmptyTime = '--:--',
+  EmptyLatLng = '--.--',
+}
 
 const SunriseSunset = ({ lat, lng }) => {
-  const [sunrise, setSunrise] = useState(EmptyTime);
-  const [sunset, setSunset] = useState(EmptyTime);
-  const [firstLight, setFirstLight] = useState(EmptyTime);
-  const [lastLight, setLastLight] = useState(EmptyTime);
+  const [sunrise, setSunrise] = useState(EmptyValues.EmptyTime);
+  const [sunset, setSunset] = useState(EmptyValues.EmptyTime);
+  const [firstLight, setFirstLight] = useState(EmptyValues.EmptyTime);
+  const [lastLight, setLastLight] = useState(EmptyValues.EmptyTime);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -44,12 +47,18 @@ const SunriseSunset = ({ lat, lng }) => {
   return (
     <View style={styles.container}>
       <Text>
-        First light: {isLoading ? 'loading...' : firstLight ?? EmptyTime}
+        First light:{' '}
+        {isLoading ? 'loading...' : firstLight ?? EmptyValues.EmptyTime}
       </Text>
-      <Text>Sunrise: {isLoading ? 'loading...' : sunrise ?? EmptyTime}</Text>
-      <Text>Sunset: {isLoading ? 'loading...' : sunset ?? EmptyTime}</Text>
       <Text>
-        Last light: {isLoading ? 'loading...' : lastLight ?? EmptyTime}
+        Sunrise: {isLoading ? 'loading...' : sunrise ?? EmptyValues.EmptyTime}
+      </Text>
+      <Text>
+        Sunset: {isLoading ? 'loading...' : sunset ?? EmptyValues.EmptyTime}
+      </Text>
+      <Text>
+        Last light:{' '}
+        {isLoading ? 'loading...' : lastLight ?? EmptyValues.EmptyTime}
       </Text>
       {errorMessage && (
         <Text style={styles.SunriseSunset__ErrorMessage}>{errorMessage}</Text>
