@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Acknowledgements /> renders correctly 1`] = `
+<RCTSafeAreaView
+  style={
+    {
+      "height": "5%",
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "fontFamily": "WaitingfortheSunrise_400Regular",
+        "fontSize": 18,
+        "textAlign": "center",
+      }
+    }
+  >
+    Powered by:
+     
+    <Text
+      accessibilityRole="link"
+      onPress={[Function]}
+      style={
+        {
+          "color": "blue",
+          "textAlign": "center",
+        }
+      }
+    >
+      SunriseSunset.io
+    </Text>
+  </Text>
+</RCTSafeAreaView>
+`;
