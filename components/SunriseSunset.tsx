@@ -70,12 +70,7 @@ const SunriseSunset = ({ lat, lng }) => {
 export default SunriseSunset;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 3,
-    backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-  },
+  container: {},
   SunriseSunset__ErrorMessage: {
     color: 'red',
   },
