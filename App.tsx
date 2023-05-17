@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useLocation } from './hooks/use-location';
 import { PermissionStatus } from 'expo-location';
 import AddressLookup from './components/AddressLookup';
@@ -22,19 +22,19 @@ export default function App() {
   }
   return (
     <MainLayout onLayoutRootView={onLayoutRootView}>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <AddressLookup location={location} setLocation={setLocation} />
         <CurrentLocation
           latitude={location?.coords?.latitude}
           longitude={location?.coords?.longitude}
-          locationAddresses={locationAddresses}
+          locationAddress={locationAddresses?.[0]}
         />
         <StatusBar style="auto" />
         <SunriseSunset
           lat={location?.coords?.latitude}
           lng={location?.coords?.longitude}
         />
-      </View>
+      </SafeAreaView>
     </MainLayout>
   );
 }
