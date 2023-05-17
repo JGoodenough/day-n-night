@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     justifyContent: 'space-between',
+    alignContent: 'center',
+    alignItems: 'center',
     padding: 10,
     paddingTop: 0,
     paddingBottom: 0,

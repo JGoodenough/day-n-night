@@ -1,5 +1,5 @@
 import { StyleSheet, Text, SafeAreaView } from 'react-native';
-import { AppFontSizes, AppFontFamilies } from '../constants/ui';
+import { AppFontSizes, AppFontFamilies, AppColors } from '../constants/ui';
 
 const Header = () => {
   return (
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     height: '10%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#1a7998',
+    backgroundColor: AppColors.PrimaryThemeColor,
     fontFamily: 'WaitingfortheSunrise_400Regular',
   },
   Header__AppName: {

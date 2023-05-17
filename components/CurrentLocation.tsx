@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { LocationGeocodedAddress } from 'expo-location';
-import { AppFontSizes } from '../constants/ui';
+import { AppColors, AppFontSizes } from '../constants/ui';
 
 type CurrentLocation = {
   latitude?: number;
@@ -18,7 +18,7 @@ const CurrentLocation: FC<CurrentLocation> = ({
 }) => {
   return (
     <View>
-      <Text style={styles.CurrentLocation__Title}>Current Location:</Text>
+      <Text style={styles.CurrentLocation__Title}>Current Location</Text>
 
       <View style={styles.CurrentLocation__LocationAddressContainer}>
         {locationAddress && (
@@ -52,6 +52,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: AppFontSizes.BodyHeaderFontSize,
     textAlign: 'center',
+    borderBottomColor: AppColors.PrimaryThemeColor,
+    borderBottomWidth: 1,
+    borderStyle: 'dashed',
+    color: AppColors.PrimaryThemeColor,
   },
   CurrentLocation__LatLngContainer: {
     flexDirection: 'row',
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   CurrentLocation__ErrorMessageContainer: {
-    marginBottom: 6,
+    marginBottom: 16,
   },
 });
 

@@ -7,3 +7,9 @@ export enum AppFontSizes {
 export enum AppFontFamilies {
   MainFontFamily = 'WaitingfortheSunrise_400Regular',
 }
+
+export enum AppColors {
+  TitleCardColor = '#fff',
+  PrimaryThemeColor = '#1a7998',
+  SecondaryThemeColor = '#cec9c6',
+}
