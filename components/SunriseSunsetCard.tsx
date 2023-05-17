@@ -40,8 +40,7 @@ const SunriseSunsetCard: FC<SunriseSunsetCardProps> = ({
         {isLoading ? 'loading...' : sunset ?? EmptyValues.EmptyTime}
       </Text>
       <Text style={[styles.SunriseSunset__Time, { marginBottom: 4 }]}>
-        (dusk)
-        {isLoading ? 'loading...' : dusk ?? EmptyValues.EmptyTime}
+        (dusk) {isLoading ? 'loading...' : dusk ?? EmptyValues.EmptyTime}
       </Text>
       {errorMessage && (
         <Text style={styles.SunriseSunset__ErrorMessage}>{errorMessage}</Text>

@@ -14,7 +14,7 @@ export default Header;
 const styles = StyleSheet.create({
   Header__Container: {
     width: '100%',
-    height: '10%',
+    height: '12%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: AppColors.PrimaryThemeColor,
@@ -24,5 +24,6 @@ const styles = StyleSheet.create({
     fontSize: AppFontSizes.HeaderFontSize,
     fontFamily: AppFontFamilies.MainFontFamily,
     color: '#fff',
+    paddingTop: 36,
   },
 });
