@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react';
 import { EmptyValues } from '../constants/ui';
+import dayjs from 'dayjs';
 
 const SunriseSunsetAPI = 'https://api.sunrisesunset.io/json';
+
+export const DATE_FORMAT = 'YYYY-MM-DD';
 
 type SunriseSunsetHookProps = {
   lat?: string;
   lng?: string;
+  date?: string;
 };
 
-export const useSunriseSunset = ({ lat, lng }: SunriseSunsetHookProps) => {
+export const useSunriseSunset = ({
+  lat,
+  lng,
+  date = dayjs().format(DATE_FORMAT),
+}: SunriseSunsetHookProps) => {
   const [sunrise, setSunrise] = useState(EmptyValues.EmptyTime);
   const [sunset, setSunset] = useState(EmptyValues.EmptyTime);
   const [dawn, setDawn] = useState(EmptyValues.EmptyTime);
@@ -24,6 +32,7 @@ export const useSunriseSunset = ({ lat, lng }: SunriseSunsetHookProps) => {
           const url = `${SunriseSunsetAPI}?${new URLSearchParams({
             lat,
             lng,
+            date,
           })}`;
           const response = await fetch(url);
           const sunriseSunsetJSON = await response.json();

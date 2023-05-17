@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     padding: 12,
     color: AppColors.SecondaryThemeColor,
     borderRadius: 8,
+    marginBottom: 8,
   },
   SunriseSunset__DayTitle: {
     fontWeight: '600',
