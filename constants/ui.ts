@@ -13,3 +13,8 @@ export enum AppColors {
   PrimaryThemeColor = '#1a7998',
   SecondaryThemeColor = '#cec9c6',
 }
+
+export enum EmptyValues {
+  EmptyTime = '--:--',
+  EmptyLatLng = '--.--',
+}

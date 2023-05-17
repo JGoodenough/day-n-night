@@ -31,8 +31,10 @@ export default function App() {
         />
         <StatusBar style="auto" />
         <SunriseSunset
-          lat={location?.coords?.latitude}
-          lng={location?.coords?.longitude}
+          lat={location?.coords?.latitude ? `${location.coords.latitude}` : ''}
+          lng={
+            location?.coords?.longitude ? `${location.coords.longitude}` : ''
+          }
         />
       </SafeAreaView>
     </MainLayout>
