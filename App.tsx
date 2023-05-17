@@ -14,8 +14,13 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const { fontsLoaded, onLayoutRootView } = useAppFont();
-  const { location, setLocation, locationAddresses, locationPermissionStatus } =
-    useLocation();
+  const {
+    location,
+    setLocation,
+    locationAddresses,
+    locationPermissionStatus,
+    locationErrorMessage,
+  } = useLocation();
 
   if (!fontsLoaded) {
     return null;
@@ -28,6 +33,7 @@ export default function App() {
           latitude={location?.coords?.latitude}
           longitude={location?.coords?.longitude}
           locationAddress={locationAddresses?.[0]}
+          errorMessage={locationErrorMessage}
         />
         <StatusBar style="auto" />
         <SunriseSunset

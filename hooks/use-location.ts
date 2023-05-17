@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 
+enum LocationErrorMessages {
+  NotFound = 'Location not found. Use search bar to find a valid location.',
+}
+
 export const useLocation = () => {
   const [location, setLocation] = useState<Location.LocationObject>(null);
   const [locationPermissionStatus, setLocationPermissionStatus] =
     useState(null);
   const [locationAddresses, setLocationAddresses] = useState(null);
+  const [locationErrorMessage, setLocationErrorMessage] = useState();
+
   useEffect(() => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -28,6 +34,9 @@ export const useLocation = () => {
         };
         const addresses = await Location.reverseGeocodeAsync(coords);
         setLocationAddresses([...addresses]);
+        const errorMessage =
+          !addresses?.length || !location ? LocationErrorMessages.NotFound : '';
+        setLocationErrorMessage(errorMessage);
       }
     })();
   }, [location]);
@@ -38,5 +47,6 @@ export const useLocation = () => {
     locationAddresses,
     setLocationAddresses,
     locationPermissionStatus,
+    locationErrorMessage,
   };
 };
