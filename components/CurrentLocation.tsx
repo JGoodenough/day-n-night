@@ -72,10 +72,11 @@ const styles = StyleSheet.create({
   },
   CurrentLocation__ErrorMessage: {
     color: 'red',
-    fontSize: AppFontSizes.BodyFontSize,
+    fontSize: 14,
+    textAlign: 'center',
   },
   CurrentLocation__ErrorMessageContainer: {
-    marginBottom: 20,
+    marginBottom: 6,
   },
 });
 

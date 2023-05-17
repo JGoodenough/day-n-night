@@ -10,7 +10,7 @@ export const useLocation = () => {
   const [locationPermissionStatus, setLocationPermissionStatus] =
     useState(null);
   const [locationAddresses, setLocationAddresses] = useState(null);
-  const [locationErrorMessage, setLocationErrorMessage] = useState();
+  const [locationErrorMessage, setLocationErrorMessage] = useState('');
 
   useEffect(() => {
     (async () => {

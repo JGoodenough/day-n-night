@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useLocation } from './hooks/use-location';
-import { PermissionStatus } from 'expo-location';
 import AddressLookup from './components/AddressLookup';
 import CurrentLocation from './components/CurrentLocation';
 import SunriseSunset from './components/SunriseSunset';
@@ -14,13 +13,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const { fontsLoaded, onLayoutRootView } = useAppFont();
-  const {
-    location,
-    setLocation,
-    locationAddresses,
-    locationPermissionStatus,
-    locationErrorMessage,
-  } = useLocation();
+  const { location, setLocation, locationAddresses, locationErrorMessage } =
+    useLocation();
 
   if (!fontsLoaded) {
     return null;
@@ -48,8 +42,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    // alignItems: 'flex-start',
-    // justifyContent: 'flex-start',
     justifyContent: 'space-between',
     padding: 10,
     paddingTop: 0,
