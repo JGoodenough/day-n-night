@@ -1,56 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { useLocation } from './hooks/use-location';
-import AddressLookup from './components/AddressLookup';
-import CurrentLocation from './components/CurrentLocation';
-import SunriseSunset from './components/SunriseSunset';
-import MainLayout from './components/layouts/MainLayout';
-import { useAppFont } from './hooks/use-app-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { AppFontSizes, AppFontFamilies } from './constants/ui';
+import { NavigationContainer, ThemeProvider } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useLocation } from './hooks/use-location';
+import HomeScreen from './components/screens/HomeScreen';
+import { ScreenRouteNames } from './components/screens/constants';
+import { LocationContext } from './context/location';
+import { useLayoutRootView } from './hooks/use-layout-root-view';
 
-SplashScreen.preventAutoHideAsync();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const { fontsLoaded, onLayoutRootView } = useAppFont();
   const { location, setLocation, locationAddresses, locationErrorMessage } =
     useLocation();
+  const { appIsReady, fontsLoaded, onLayoutRootView } = useLayoutRootView();
 
-  if (!fontsLoaded) {
+  if (!appIsReady || !fontsLoaded) {
     return null;
   }
+
   return (
-    <MainLayout onLayoutRootView={onLayoutRootView}>
-      <SafeAreaView style={styles.container}>
-        <AddressLookup location={location} setLocation={setLocation} />
-        <CurrentLocation
-          latitude={location?.coords?.latitude}
-          longitude={location?.coords?.longitude}
-          locationAddress={locationAddresses?.[0]}
-          errorMessage={locationErrorMessage}
-        />
-        <StatusBar style="auto" />
-        <SunriseSunset
-          lat={location?.coords?.latitude ? `${location.coords.latitude}` : ''}
-          lng={
-            location?.coords?.longitude ? `${location.coords.longitude}` : ''
-          }
-        />
-      </SafeAreaView>
-    </MainLayout>
+    <LocationContext.Provider
+      value={{
+        location,
+        setLocation,
+        locationAddresses,
+        locationErrorMessage,
+      }}
+    >
+      <NavigationContainer onReady={onLayoutRootView}>
+        <Stack.Navigator>
+          <Stack.Screen name={ScreenRouteNames.Home} component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </LocationContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    justifyContent: 'space-between',
-    alignContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    paddingTop: 0,
-    paddingBottom: 0,
-    fontSize: AppFontSizes.BodyFontSize,
-    fontFamily: AppFontFamilies.MainFontFamily,
-  },
-});

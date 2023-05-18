@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   Acknowledgements__Text: {
     textAlign: 'center',
-    fontFamily: 'WaitingfortheSunrise_400Regular',
+    // fontFamily: 'WaitingfortheSunrise_400Regular',
     fontSize: AppFontSizes.MainFontSize,
   },
 });

@@ -4,6 +4,7 @@ export enum AppFontSizes {
   BodyFontSize = 28,
   BodyHeaderFontSize = 32,
 }
+
 export enum AppFontFamilies {
   MainFontFamily = 'WaitingfortheSunrise_400Regular',
 }
