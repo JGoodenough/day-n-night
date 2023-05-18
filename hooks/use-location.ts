@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
+import dayjs from 'dayjs';
+
+const DEFAULT_LOCATION_TEXT = 'Montauk, NY';
 
 enum LocationErrorMessages {
   NotFound = 'Location not found. Use search bar to find a valid location.',
@@ -16,12 +19,34 @@ export const useLocation = () => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
       setLocationPermissionStatus(status);
-      if (Location.PermissionStatus.GRANTED !== status) {
-        return;
+      if (Location.PermissionStatus.GRANTED === status) {
+        const locationObj = await Location.getCurrentPositionAsync();
+        setLocation(locationObj);
+      } else {
+        // If Geo Location Permission is denied set the default location
+        // until the user manually selects a location via the search bar.
+        const geocodedLocations = await Location.geocodeAsync(
+          DEFAULT_LOCATION_TEXT
+        );
+        // Pick first result
+        if (geocodedLocations?.length) {
+          const firstGeocodedLocation = geocodedLocations[0];
+          setLocation({
+            coords: {
+              ...firstGeocodedLocation,
+              altitude: null,
+              accuracy: null,
+              altitudeAccuracy: null,
+              heading: null,
+              speed: null,
+            },
+            mocked: true,
+            timestamp: dayjs().unix(),
+          });
+        } else {
+          setLocationErrorMessage(LocationErrorMessages.NotFound);
+        }
       }
-
-      const locationObj = await Location.getCurrentPositionAsync();
-      setLocation(locationObj);
     })();
   }, []);
 
