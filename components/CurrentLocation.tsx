@@ -3,43 +3,46 @@ import { Text, View, StyleSheet } from 'react-native';
 import { LocationGeocodedAddress } from 'expo-location';
 import { AppColors, AppFontSizes } from '../constants/ui';
 import { Entypo } from '@expo/vector-icons';
+import TimezoneBadge from './TimezoneBadge';
 
 type CurrentLocation = {
-  latitude?: number;
-  longitude?: number;
   locationAddress?: LocationGeocodedAddress;
   errorMessage?: string;
 };
 
 const CurrentLocation: FC<CurrentLocation> = ({
-  latitude = '--.--',
-  longitude = '--.--',
   locationAddress,
   errorMessage,
 }) => {
   return (
     <View>
       <View style={styles.CurrentLocation__LocationAddressContainer}>
-        <Entypo
-          name="location"
-          size={24}
-          color={AppColors.PrimaryThemeColor}
-          style={styles.CurrentLocation__LocationPinIcon}
-        />
         {locationAddress && (
-          <Text style={styles.CurrentLocation__LocationAddress}>
-            {locationAddress.city}, {locationAddress.region}
-          </Text>
+          <View style={styles.CurrentLocation__LocationInfoContainer}>
+            <View style={styles.CurrentLocation__LocationInfoContainerTopRow}>
+              <Entypo
+                name="location"
+                size={24}
+                color={AppColors.PrimaryThemeColor}
+                style={styles.CurrentLocation__LocationPinIcon}
+              />
+              <Text style={styles.CurrentLocation__LocationAddress}>
+                {locationAddress?.city && `${locationAddress.city},`}{' '}
+                {locationAddress.region}
+              </Text>
+            </View>
+            <View
+              style={styles.CurrentLocation__LocationInfoContainerBottomRow}
+            >
+              <Text style={styles.CurrentLocation__LocationAddressByLine}>
+                {locationAddress.country} ({locationAddress.subregion})
+              </Text>
+              {locationAddress?.timezone && (
+                <TimezoneBadge timezone={locationAddress.timezone} />
+              )}
+            </View>
+          </View>
         )}
-      </View>
-
-      <View style={styles.CurrentLocation__LatLngContainer}>
-        <Text style={styles.CurrentLocation__label}>Lat: </Text>
-        {!!latitude && (
-          <Text style={styles.CurrentLocation__latOrLng}>{latitude}</Text>
-        )}
-        <Text style={styles.CurrentLocation__label}>Lng: </Text>
-        {!!longitude && <Text>{longitude}</Text>}
       </View>
       <View style={styles.CurrentLocation__ErrorMessageContainer}>
         {errorMessage && (
@@ -71,8 +74,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  CurrentLocation__LocationInfoContainer: {
+    flexDirection: 'column',
+  },
+  CurrentLocation__LocationInfoContainerTopRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  CurrentLocation__LocationInfoContainerBottomRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   CurrentLocation__LocationAddress: {
     fontSize: 28,
+  },
+  CurrentLocation__LocationAddressByLine: {
+    fontSize: 18,
+    color: AppColors.PrimaryThemeColor,
   },
   CurrentLocation__label: {
     fontWeight: '600',
@@ -89,7 +108,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   CurrentLocation__LocationPinIcon: {
-    marginRight: 2,
+    marginRight: 4,
   },
 });
 
