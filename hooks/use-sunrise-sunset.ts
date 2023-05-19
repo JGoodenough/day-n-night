@@ -45,7 +45,7 @@ export const useSunriseSunset = ({
           setDusk(dusk);
         } catch (err) {
           setErrorMessage(
-            'An error occurred when attempting to retrieve the sunrise or sunset times.'
+            'An error occurred when attempting to retrieve the sunrise/sunset times.'
           );
         } finally {
           setIsLoading(false);

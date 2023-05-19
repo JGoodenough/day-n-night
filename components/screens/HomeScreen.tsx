@@ -17,8 +17,6 @@ const HomeScreen = () => {
       <SafeAreaView style={styles.container}>
         <AddressLookup location={location} setLocation={setLocation} />
         <CurrentLocation
-          latitude={location?.coords?.latitude}
-          longitude={location?.coords?.longitude}
           locationAddress={locationAddresses?.[0]}
           errorMessage={locationErrorMessage}
         />
