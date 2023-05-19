@@ -1,12 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useLocation } from './hooks/use-location';
 import HomeScreen from './components/screens/HomeScreen';
 import { ScreenRouteNames } from './components/screens/constants';
 import { LocationContext } from './context/location';
 import { useLayoutRootView } from './hooks/use-layout-root-view';
+import { Feather } from '@expo/vector-icons';
+import { AppColors } from './constants/ui';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const { location, setLocation, locationAddresses, locationErrorMessage } =
@@ -27,13 +29,50 @@ export default function App() {
       }}
     >
       <NavigationContainer onReady={onLayoutRootView}>
-        <Stack.Navigator>
-          <Stack.Screen
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              let iconColor;
+
+              if (route.name === ScreenRouteNames.Home) {
+                iconName = 'clock';
+                iconColor = focused
+                  ? AppColors.PrimaryThemeColor
+                  : AppColors.SecondaryThemeColor;
+              } else if (route.name === ScreenRouteNames.Settings) {
+                iconName = 'settings';
+                iconColor = focused
+                  ? AppColors.PrimaryThemeColor
+                  : AppColors.SecondaryThemeColor;
+              }
+
+              // You can return any component that you like here!
+              return <Feather name={iconName} size={24} color={iconColor} />;
+            },
+            tabBarActiveTintColor: AppColors.PrimaryThemeColor,
+            tabBarInactiveTintColor: AppColors.SecondaryThemeColor,
+            headerTitleAlign: 'center',
+          })}
+        >
+          <Tab.Screen
             name={ScreenRouteNames.Home}
             component={HomeScreen}
-            options={{ title: ScreenRouteNames.HomeTitle }}
+            options={{
+              title: ScreenRouteNames.HomeTitle,
+              headerTintColor: AppColors.PrimaryThemeColor,
+            }}
           />
-        </Stack.Navigator>
+
+          <Tab.Screen
+            name={ScreenRouteNames.Settings}
+            component={HomeScreen}
+            options={{
+              title: ScreenRouteNames.SettingsTitle,
+              headerTintColor: AppColors.PrimaryThemeColor,
+            }}
+          />
+        </Tab.Navigator>
       </NavigationContainer>
     </LocationContext.Provider>
   );

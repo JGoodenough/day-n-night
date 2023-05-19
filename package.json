@@ -17,8 +17,8 @@
   "dependencies": {
     "@expo-google-fonts/waiting-for-the-sunrise": "^0.2.3",
     "@expo/html-elements": "^0.4.2",
+    "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
-    "@react-navigation/native-stack": "^6.9.12",
     "@types/react": "~18.0.27",
     "dayjs": "^1.11.7",
     "expo": "~48.0.15",
