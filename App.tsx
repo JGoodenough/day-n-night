@@ -1,5 +1,4 @@
-import * as SplashScreen from 'expo-splash-screen';
-import { NavigationContainer, ThemeProvider } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useLocation } from './hooks/use-location';
 import HomeScreen from './components/screens/HomeScreen';
