@@ -19,26 +19,31 @@ const HomeScreen = () => {
 
   return (
     <MainLayout>
-      {isLocationLoading ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <SafeAreaView style={styles.container}>
-          <AddressLookup location={location} setLocation={setLocation} />
-          <CurrentLocation
-            locationAddress={locationAddresses?.[0]}
-            errorMessage={locationErrorMessage}
-          />
-          <StatusBar style="auto" />
-          <SunriseSunset
-            lat={
-              location?.coords?.latitude ? `${location.coords.latitude}` : ''
-            }
-            lng={
-              location?.coords?.longitude ? `${location.coords.longitude}` : ''
-            }
-          />
-        </SafeAreaView>
-      )}
+      <SafeAreaView style={styles.container}>
+        <AddressLookup location={location} setLocation={setLocation} />
+
+        {isLocationLoading ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <>
+            <CurrentLocation
+              locationAddress={locationAddresses?.[0]}
+              errorMessage={locationErrorMessage}
+            />
+            <StatusBar style="auto" />
+            <SunriseSunset
+              lat={
+                location?.coords?.latitude ? `${location.coords.latitude}` : ''
+              }
+              lng={
+                location?.coords?.longitude
+                  ? `${location.coords.longitude}`
+                  : ''
+              }
+            />
+          </>
+        )}
+      </SafeAreaView>
     </MainLayout>
   );
 };
