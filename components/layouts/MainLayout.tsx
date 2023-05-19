@@ -1,35 +1,19 @@
 import { FC, ReactNode } from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
-import Header from '../Header';
-import Acknowledgements from '../Acknowledgements';
+import { View, StyleSheet } from 'react-native';
 
-export type MainLayout = {
+type MainLayoutProps = {
   children?: ReactNode;
-  onLayoutRootView?: () => Promise<void>;
 };
-const MainLayout: FC<MainLayout> = ({ children, onLayoutRootView }) => {
-  return (
-    <SafeAreaView
-      style={styles.MainLayout__Container}
-      onLayout={onLayoutRootView}
-    >
-      <Header />
-      <View style={styles.MainLayout__Body}>{children}</View>
-      <Acknowledgements />
-    </SafeAreaView>
-  );
+
+const MainLayout: FC<MainLayoutProps> = ({ children }) => {
+  return <View style={styles.MainLayout}>{children}</View>;
 };
 
 export default MainLayout;
 
 const styles = StyleSheet.create({
-  MainLayout__Container: {
+  MainLayout: {
     flex: 1,
-    justifyContent: 'space-between',
-  },
-  MainLayout__Body: {
-    width: '100%',
-    height: '85%',
     padding: 10,
   },
 });

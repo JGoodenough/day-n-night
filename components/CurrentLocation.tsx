@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { LocationGeocodedAddress } from 'expo-location';
 import { AppColors, AppFontSizes } from '../constants/ui';
+import { Entypo } from '@expo/vector-icons';
 
 type CurrentLocation = {
   latitude?: number;
@@ -18,9 +19,13 @@ const CurrentLocation: FC<CurrentLocation> = ({
 }) => {
   return (
     <View>
-      <Text style={styles.CurrentLocation__Title}>Current Location</Text>
-
       <View style={styles.CurrentLocation__LocationAddressContainer}>
+        <Entypo
+          name="location"
+          size={24}
+          color={AppColors.PrimaryThemeColor}
+          style={styles.CurrentLocation__LocationPinIcon}
+        />
         {locationAddress && (
           <Text style={styles.CurrentLocation__LocationAddress}>
             {locationAddress.city}, {locationAddress.region}
@@ -64,6 +69,7 @@ const styles = StyleSheet.create({
   CurrentLocation__LocationAddressContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   CurrentLocation__LocationAddress: {
     fontSize: 28,
@@ -81,6 +87,9 @@ const styles = StyleSheet.create({
   },
   CurrentLocation__ErrorMessageContainer: {
     marginBottom: 16,
+  },
+  CurrentLocation__LocationPinIcon: {
+    marginRight: 2,
   },
 });
 
