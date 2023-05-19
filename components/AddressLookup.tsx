@@ -27,7 +27,7 @@ const AddressLookup = ({ location, setLocation }) => {
         onChangeText={onChangeText}
         style={styles.AddressLookup__Input}
         value={text}
-        placeholder="Enter your location here"
+        placeholder="Search"
       />
     </SafeAreaView>
   );
