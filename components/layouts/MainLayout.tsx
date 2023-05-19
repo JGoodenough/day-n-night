@@ -14,7 +14,6 @@ export default MainLayout;
 const styles = StyleSheet.create({
   MainLayout: {
     flex: 1,
-    paddingTop: 10,
-    paddingBottom: 10,
+    padding: 10,
   },
 });

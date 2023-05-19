@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     flex: 1,
+    backgroundColor: '#FFF',
   },
 });
 export default AddressLookup;
