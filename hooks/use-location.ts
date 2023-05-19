@@ -9,6 +9,7 @@ enum LocationErrorMessages {
 }
 
 export const useLocation = () => {
+  const [isLocationLoading, setIsLocationLoading] = useState(false);
   const [location, setLocation] = useState<Location.LocationObject>(null);
   const [locationPermissionStatus, setLocationPermissionStatus] =
     useState(null);
@@ -17,6 +18,7 @@ export const useLocation = () => {
 
   useEffect(() => {
     (async () => {
+      setIsLocationLoading(true);
       const { status } = await Location.requestForegroundPermissionsAsync();
       setLocationPermissionStatus(status);
       if (Location.PermissionStatus.GRANTED === status) {
@@ -47,11 +49,13 @@ export const useLocation = () => {
           setLocationErrorMessage(LocationErrorMessages.NotFound);
         }
       }
+      setIsLocationLoading(false);
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
+      setIsLocationLoading(true);
       if (location?.coords?.latitude || location?.coords?.longitude) {
         const coords = {
           latitude: location.coords?.latitude,
@@ -63,6 +67,7 @@ export const useLocation = () => {
           !addresses?.length || !location ? LocationErrorMessages.NotFound : '';
         setLocationErrorMessage(errorMessage);
       }
+      setIsLocationLoading(false);
     })();
   }, [location]);
 
@@ -73,5 +78,6 @@ export const useLocation = () => {
     setLocationAddresses,
     locationPermissionStatus,
     locationErrorMessage,
+    isLocationLoading,
   };
 };

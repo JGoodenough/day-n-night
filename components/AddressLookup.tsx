@@ -18,7 +18,7 @@ const AddressLookup = ({ location, setLocation }) => {
         });
       }
     })();
-  }, [text]);
+  }, [!!text]);
 
   return (
     <SafeAreaView style={styles.AddressLookup__SafeContainer}>
