@@ -21,5 +21,6 @@ const styles = StyleSheet.create({
   MainLayout: {
     flex: 1,
     padding: 10,
+    justifyContent: 'space-between',
   },
 });

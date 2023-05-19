@@ -7,6 +7,7 @@ import { LocationContext } from './context/location';
 import { useLayoutRootView } from './hooks/use-layout-root-view';
 import { Feather } from '@expo/vector-icons';
 import { AppColors } from './constants/ui';
+import SettingsScreen from './components/screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -66,7 +67,7 @@ export default function App() {
 
           <Tab.Screen
             name={ScreenRouteNames.Settings}
-            component={HomeScreen}
+            component={SettingsScreen}
             options={{
               title: ScreenRouteNames.SettingsTitle,
               headerTintColor: AppColors.PrimaryThemeColor,
