@@ -28,7 +28,11 @@ export default function App() {
     >
       <NavigationContainer onReady={onLayoutRootView}>
         <Stack.Navigator>
-          <Stack.Screen name={ScreenRouteNames.Home} component={HomeScreen} />
+          <Stack.Screen
+            name={ScreenRouteNames.Home}
+            component={HomeScreen}
+            options={{ title: ScreenRouteNames.HomeTitle }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </LocationContext.Provider>
