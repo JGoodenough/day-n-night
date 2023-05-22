@@ -6,6 +6,7 @@ const DEFAULT_LOCATION_TEXT = 'Montauk, NY';
 
 enum LocationErrorMessages {
   NotFound = 'Location not found. Use search bar to find a valid location.',
+  UnauthorizedLocation = 'We could not find your position. Please make sure your location service provider is on.',
 }
 
 export const useLocation = () => {
@@ -43,8 +44,7 @@ export const useLocation = () => {
           timestamp: dayjs().unix(),
         });
       } catch (err) {
-        console.error(err);
-        setLocationErrorMessage(LocationErrorMessages.NotFound);
+        setLocationErrorMessage(LocationErrorMessages.UnauthorizedLocation);
       }
     }
   };
