@@ -1,21 +1,42 @@
 import { SafeAreaView, StyleSheet, TextInput, Text, View } from 'react-native';
 import { geocodeAsync } from 'expo-location';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { MAP_BOX_PUBLIC_API_TOKEN } from '@env';
+import 'react-native-get-random-values';
+import { nanoid } from 'nanoid';
 
 const AddressLookup = ({ location, setLocation }) => {
   const [text, onChangeText] = useState('');
+  const sessionToken = useMemo(() => nanoid(), []);
 
   useEffect(() => {
     (async () => {
-      const geocodeLocationInfo = await geocodeAsync(text);
-      if (geocodeLocationInfo) {
-        setLocation({
-          ...location,
-          coords: {
-            ...location?.coords,
-            ...geocodeLocationInfo[0],
-          },
-        });
+      // const geocodeLocationInfo = await geocodeAsync(text);
+      // if (geocodeLocationInfo) {
+      //   setLocation({
+      //     ...location,
+      //     coords: {
+      //       ...location?.coords,
+      //       ...geocodeLocationInfo[0],
+      //     },
+      //   });
+      // }
+      try {
+        if (text) {
+          const url = `https://api.mapbox.com/search/searchbox/v1/suggest?${new URLSearchParams(
+            {
+              access_token: MAP_BOX_PUBLIC_API_TOKEN,
+              session_token: sessionToken,
+              q: text,
+            }
+          )}`;
+          console.log(url);
+          const result = await fetch(url);
+          const suggestions = await result.json();
+          console.log(JSON.stringify(suggestions, null, 2));
+        }
+      } catch (err) {
+        console.error(err, 'ERROR ADDRESS LOOKUP');
       }
     })();
   }, [!!text]);
