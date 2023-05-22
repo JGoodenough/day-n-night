@@ -28,20 +28,26 @@ const SunriseSunsetCard: FC<SunriseSunsetCardProps> = ({
     <View style={styles.container}>
       <Text style={styles.SunriseSunset__DayTitle}>{when}</Text>
       <Text style={styles.SunriseSunset__Date}>{date}</Text>
-      <Feather name="sunrise" size={32} color="#fff200" />
-      <Text style={[styles.SunriseSunset__Time, { fontSize: 16 }]}>
-        {isLoading ? 'loading...' : sunrise ?? EmptyValues.EmptyTime}
-      </Text>
-      <Text style={[styles.SunriseSunset__Time, { marginBottom: 8 }]}>
-        (dawn) {isLoading ? 'loading...' : dawn ?? EmptyValues.EmptyTime}
-      </Text>
-      <Feather name="sunset" size={32} color="#fff200" />
-      <Text style={[styles.SunriseSunset__Time, { fontSize: 16 }]}>
-        {isLoading ? 'loading...' : sunset ?? EmptyValues.EmptyTime}
-      </Text>
-      <Text style={[styles.SunriseSunset__Time, { marginBottom: 4 }]}>
-        (dusk) {isLoading ? 'loading...' : dusk ?? EmptyValues.EmptyTime}
-      </Text>
+      <View style={styles.SunriseSunset__TimesOuterContainer}>
+        <View style={styles.SunriseSunset__TimesContainer}>
+          <Feather name="sunrise" size={32} color="#fff200" />
+          <Text style={[styles.SunriseSunset__Time, { fontSize: 16 }]}>
+            {isLoading ? 'loading...' : sunrise ?? EmptyValues.EmptyTime}
+          </Text>
+          <Text style={[styles.SunriseSunset__Time, { marginBottom: 8 }]}>
+            (dawn) {isLoading ? 'loading...' : dawn ?? EmptyValues.EmptyTime}
+          </Text>
+        </View>
+        <View style={styles.SunriseSunset__TimesContainer}>
+          <Feather name="sunset" size={32} color="#fff200" />
+          <Text style={[styles.SunriseSunset__Time, { fontSize: 16 }]}>
+            {isLoading ? 'loading...' : sunset ?? EmptyValues.EmptyTime}
+          </Text>
+          <Text style={[styles.SunriseSunset__Time, { marginBottom: 4 }]}>
+            (dusk) {isLoading ? 'loading...' : dusk ?? EmptyValues.EmptyTime}
+          </Text>
+        </View>
+      </View>
       {errorMessage && (
         <Text style={styles.SunriseSunset__ErrorMessage}>{errorMessage}</Text>
       )}
@@ -77,6 +83,17 @@ const styles = StyleSheet.create({
   },
   SunriseSunset__ErrorMessage: {
     color: 'red',
+  },
+  SunriseSunset__TimesOuterContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '100%',
+  },
+  SunriseSunset__TimesContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   SunriseSunset__Time: {
     color: AppColors.SecondaryThemeColor,

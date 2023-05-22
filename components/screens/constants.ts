@@ -1,4 +1,6 @@
 export enum ScreenRouteNames {
   Home = 'Home',
-  HomeTitle = 'Location Times',
+  HomeTitle = 'Times',
+  Settings = 'Settings',
+  SettingsTitle = 'Settings',
 }

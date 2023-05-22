@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import AddressLookup from '../AddressLookup';
 import CurrentLocation from '../CurrentLocation';
@@ -9,24 +9,40 @@ import { LocationContext } from '../../context/location';
 import MainLayout from '../layouts/MainLayout';
 
 const HomeScreen = () => {
-  const { location, setLocation, locationAddresses, locationErrorMessage } =
-    useContext(LocationContext);
+  const {
+    location,
+    setLocation,
+    locationAddresses,
+    locationErrorMessage,
+    isLocationLoading,
+  } = useContext(LocationContext);
 
   return (
     <MainLayout>
       <SafeAreaView style={styles.container}>
         <AddressLookup location={location} setLocation={setLocation} />
-        <CurrentLocation
-          locationAddress={locationAddresses?.[0]}
-          errorMessage={locationErrorMessage}
-        />
-        <StatusBar style="auto" />
-        <SunriseSunset
-          lat={location?.coords?.latitude ? `${location.coords.latitude}` : ''}
-          lng={
-            location?.coords?.longitude ? `${location.coords.longitude}` : ''
-          }
-        />
+
+        {isLocationLoading ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <>
+            <CurrentLocation
+              locationAddress={locationAddresses?.[0]}
+              errorMessage={locationErrorMessage}
+            />
+            <StatusBar style="auto" />
+            <SunriseSunset
+              lat={
+                location?.coords?.latitude ? `${location.coords.latitude}` : ''
+              }
+              lng={
+                location?.coords?.longitude
+                  ? `${location.coords.longitude}`
+                  : ''
+              }
+            />
+          </>
+        )}
       </SafeAreaView>
     </MainLayout>
   );
