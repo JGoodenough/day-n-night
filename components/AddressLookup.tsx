@@ -2,12 +2,11 @@ import { SafeAreaView, StyleSheet, TextInput, Text, View } from 'react-native';
 import { geocodeAsync } from 'expo-location';
 import { useEffect, useMemo, useState } from 'react';
 import { MAP_BOX_PUBLIC_API_TOKEN } from '@env';
-import 'react-native-get-random-values';
-import { nanoid } from 'nanoid';
+import * as Crypto from 'expo-crypto';
 
 const AddressLookup = ({ location, setLocation }) => {
   const [text, onChangeText] = useState('');
-  const sessionToken = useMemo(() => nanoid(), []);
+  const sessionToken = useMemo(() => Crypto.randomUUID(), []);
 
   useEffect(() => {
     (async () => {
@@ -28,6 +27,7 @@ const AddressLookup = ({ location, setLocation }) => {
               access_token: MAP_BOX_PUBLIC_API_TOKEN,
               session_token: sessionToken,
               q: text,
+              types: 'city,country,region',
             }
           )}`;
           console.log(url);
