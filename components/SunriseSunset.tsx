@@ -9,9 +9,11 @@ type SunriseSunsetProps = {
   lng?: string;
 };
 
+const SUNREISE_SUNSET_DATE_FORMAT = 'ddd, MMM D, YYYY';
+
 const SunriseSunset: FC<SunriseSunsetProps> = ({ lat, lng }) => {
-  const today = dayjs().format('ddd, MMM D, YYYY');
-  const tomorrow = dayjs().add(1, 'day').format('ddd, MMM D, YYYY');
+  const today = dayjs().format(SUNREISE_SUNSET_DATE_FORMAT);
+  const tomorrow = dayjs().add(1, 'day').format(SUNREISE_SUNSET_DATE_FORMAT);
 
   const { sunrise, sunset, dawn, dusk, isLoading, errorMessage } =
     useSunriseSunset({ lat, lng });
@@ -59,5 +61,6 @@ export default SunriseSunset;
 const styles = StyleSheet.create({
   SunriseSunset__Container: {
     width: '100%',
+    zIndex: 1,
   },
 });

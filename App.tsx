@@ -8,6 +8,8 @@ import { useLayoutRootView } from './hooks/use-layout-root-view';
 import { Feather } from '@expo/vector-icons';
 import { AppColors } from './constants/ui';
 import SettingsScreen from './components/screens/SettingsScreen';
+import SearchIcon from './components/SearchIcon';
+import { useState } from 'react';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,7 +34,7 @@ export default function App() {
       <NavigationContainer onReady={onLayoutRootView}>
         <Tab.Navigator
           screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
+            tabBarIcon: ({ focused }) => {
               let iconName;
               let iconColor;
 
@@ -62,6 +64,7 @@ export default function App() {
             options={{
               title: ScreenRouteNames.HomeTitle,
               headerTintColor: AppColors.PrimaryThemeColor,
+              headerRight: () => <SearchIcon />,
             }}
           />
 

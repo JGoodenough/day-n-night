@@ -1,11 +1,20 @@
-import { SafeAreaView, StyleSheet, TextInput, Text, View } from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  Text,
+  View,
+  FlatList,
+  Modal,
+} from 'react-native';
 import { geocodeAsync } from 'expo-location';
 import { useEffect, useMemo, useState } from 'react';
 import { MAP_BOX_PUBLIC_API_TOKEN } from '@env';
 import * as Crypto from 'expo-crypto';
+import { AppColors } from '../constants/ui';
 
 const AddressLookup = ({ location, setLocation }) => {
   const [text, onChangeText] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
   const sessionToken = useMemo(() => Crypto.randomUUID(), []);
 
   useEffect(() => {
@@ -30,36 +39,63 @@ const AddressLookup = ({ location, setLocation }) => {
               types: 'city,country,region',
             }
           )}`;
-          console.log(url);
           const result = await fetch(url);
-          const suggestions = await result.json();
-          console.log(JSON.stringify(suggestions, null, 2));
+          const suggestionResults = await result.json();
+          setSuggestions(suggestionResults.suggestions);
+        } else {
+          setSuggestions([]);
         }
       } catch (err) {
         console.error(err, 'ERROR ADDRESS LOOKUP');
       }
     })();
-  }, [!!text]);
+  }, [text?.length]);
 
   return (
-    <SafeAreaView style={styles.AddressLookup__SafeContainer}>
-      <TextInput
-        aria-label="Location Search"
-        onChangeText={onChangeText}
-        style={styles.AddressLookup__Input}
-        value={text}
-        placeholder="Search"
-      />
-    </SafeAreaView>
+    <View style={styles.AddressLookup__Container}>
+      <Modal visible={false}>
+        <TextInput
+          aria-label="Location Search"
+          onChangeText={onChangeText}
+          style={styles.AddressLookup__Input}
+          value={text}
+          placeholder="Search"
+        />
+
+        <FlatList
+          style={[
+            styles.AddressLookup__SuggestionDropdown,
+            { display: !!suggestions?.length ? 'flex' : 'none' },
+          ]}
+          data={suggestions}
+          renderItem={({ item, index }) => {
+            return (
+              <Text
+                style={[
+                  styles.AddressLookup__SuggestionDropdownItem,
+                  {
+                    borderBottomWidth: index === suggestions.length - 1 ? 0 : 1,
+                  },
+                ]}
+              >
+                {item.name}{' '}
+                {item.context.region?.region_code &&
+                  `, ${item.context.region.name}`}{' '}
+                {item.context.country?.name && `(${item.context.country.name})`}
+              </Text>
+            );
+          }}
+          keyExtractor={(suggestion) => suggestion.mapbox_id}
+        />
+      </Modal>
+    </View>
   );
 };
 const styles = StyleSheet.create({
-  AddressLookup__SafeContainer: {
+  AddressLookup__Container: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     paddingBottom: 4,
-  },
-  AddressLookup__InputTitle: {
-    fontWeight: '600',
   },
   AddressLookup__Input: {
     height: 40,
@@ -69,5 +105,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
+  AddressLookup__SuggestionDropdown: {
+    width: '100%',
+    marginTop: 5,
+    borderColor: AppColors.SecondaryThemeColor,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 8,
+    zIndex: 999,
+    backgroundColor: '#FFF',
+  },
+  AddressLookup__SuggestionDropdownItem: {
+    backgroundColor: '#FFF',
+    borderBottomColor: AppColors.SecondaryThemeColor,
+    marginBottom: 5,
+    borderBottomWidth: 1,
+    padding: 6,
+  },
 });
+
 export default AddressLookup;

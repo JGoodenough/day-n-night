@@ -15,7 +15,7 @@ const CurrentLocation: FC<CurrentLocation> = ({
   errorMessage,
 }) => {
   return (
-    <View>
+    <View style={styles.CurrentLocation__Container}>
       <View style={styles.CurrentLocation__LocationAddressContainer}>
         {locationAddress && (
           <View style={styles.CurrentLocation__LocationInfoContainer}>
@@ -56,6 +56,9 @@ const CurrentLocation: FC<CurrentLocation> = ({
 };
 
 const styles = StyleSheet.create({
+  CurrentLocation__Container: {
+    zIndex: 1,
+  },
   CurrentLocation__Title: {
     fontWeight: '600',
     fontSize: AppFontSizes.BodyHeaderFontSize,
@@ -73,6 +76,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 1,
   },
   CurrentLocation__LocationInfoContainer: {
     flexDirection: 'column',
@@ -103,9 +107,11 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 14,
     textAlign: 'center',
+    zIndex: 1,
   },
   CurrentLocation__ErrorMessageContainer: {
     marginBottom: 16,
+    zIndex: 1,
   },
   CurrentLocation__LocationPinIcon: {
     marginRight: 4,

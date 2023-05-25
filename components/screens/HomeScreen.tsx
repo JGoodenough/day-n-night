@@ -1,4 +1,9 @@
-import { ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native';
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import AddressLookup from '../AddressLookup';
 import CurrentLocation from '../CurrentLocation';
@@ -19,13 +24,13 @@ const HomeScreen = () => {
 
   return (
     <MainLayout>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.HomeScreen__MainContainer}>
         <AddressLookup location={location} setLocation={setLocation} />
 
         {isLocationLoading ? (
           <ActivityIndicator size="large" />
         ) : (
-          <>
+          <View style={styles.HomeScreen__MainContainer}>
             <CurrentLocation
               locationAddress={locationAddresses?.[0]}
               errorMessage={locationErrorMessage}
@@ -41,7 +46,7 @@ const HomeScreen = () => {
                   : ''
               }
             />
-          </>
+          </View>
         )}
       </SafeAreaView>
     </MainLayout>
@@ -51,10 +56,14 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
+  HomeScreen__MainContainer: {
     justifyContent: 'space-between',
     alignContent: 'center',
     alignItems: 'center',
     fontSize: AppFontSizes.BodyFontSize,
+    zIndex: 1,
+  },
+  HomeScreen__LocationContainer: {
+    zIndex: 1,
   },
 });
