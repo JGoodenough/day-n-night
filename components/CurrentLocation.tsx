@@ -6,7 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import TimezoneBadge from './TimezoneBadge';
 
 type CurrentLocation = {
-  locationAddress?: LocationGeocodedAddress;
+  locationAddress?: Partial<LocationGeocodedAddress>;
   errorMessage?: string;
 };
 
@@ -17,7 +17,7 @@ const CurrentLocation: FC<CurrentLocation> = ({
   return (
     <View style={styles.CurrentLocation__Container}>
       <View style={styles.CurrentLocation__LocationAddressContainer}>
-        {locationAddress && (
+        {locationAddress ? (
           <View style={styles.CurrentLocation__LocationInfoContainer}>
             <View style={styles.CurrentLocation__LocationInfoContainerTopRow}>
               <Entypo
@@ -27,21 +27,29 @@ const CurrentLocation: FC<CurrentLocation> = ({
                 style={styles.CurrentLocation__LocationPinIcon}
               />
               <Text style={styles.CurrentLocation__LocationAddress}>
-                {locationAddress?.city && `${locationAddress.city},`}{' '}
-                {locationAddress.region}
+                {locationAddress?.city &&
+                  `${locationAddress.city}${
+                    locationAddress.city && locationAddress?.region ? ',' : ''
+                  }`}{' '}
+                {locationAddress?.region ? locationAddress.region : null}
               </Text>
             </View>
             <View
               style={styles.CurrentLocation__LocationInfoContainerBottomRow}
             >
               <Text style={styles.CurrentLocation__LocationAddressByLine}>
-                {locationAddress.country} ({locationAddress.subregion})
+                {locationAddress.country}{' '}
+                {locationAddress?.subregion
+                  ? `(${locationAddress.subregion})`
+                  : null}
               </Text>
               {locationAddress?.timezone && (
                 <TimezoneBadge timezone={locationAddress.timezone} />
               )}
             </View>
           </View>
+        ) : (
+          <Text>No location found.</Text>
         )}
       </View>
       <View style={styles.CurrentLocation__ErrorMessageContainer}>
