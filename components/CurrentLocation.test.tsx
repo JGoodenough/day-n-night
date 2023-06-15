@@ -45,9 +45,11 @@ describe('<CurrentLocation />', () => {
     const { getByText } = render(
       <CurrentLocation errorMessage={errorMessage} />
     );
-    const currentLocation = getByText(errorMessage);
+    const currentLocationTextNode = getByText(errorMessage);
 
-    expect(currentLocation.children).toContain(errorMessage);
+    expect(currentLocationTextNode?._fiber?.stateNode?.props?.children).toEqual(
+      errorMessage
+    );
   });
 
   it('should render just city location text', () => {
